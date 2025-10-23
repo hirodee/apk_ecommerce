@@ -1,0 +1,313 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600;700&display=swap');
+
+:root {
+    --ion-color-primary: #34B6FF;
+}
+
+* {
+    font-family: 'Muli',
+        sans-serif !important;
+}
+
+ion-list {
+    ion-item:last-child {
+        --border-color: transparent;
+    }
+
+    &.list-input {
+        ion-item {
+            --inner-padding-end: 0px !important;
+
+            ion-input {
+                margin-top: 10px !important;
+                background: whitesmoke !important;
+                --padding-start: 10px !important;
+                --padding-end: 10px !important;
+                border-radius: 5px !important;
+            }
+        }
+    }
+}
+
+.label-stacked {
+    font-size: 20px !important;
+}
+
+.apexcharts-gridline {
+    display: none !important
+}
+
+.color-primary {
+    color: #34B6FF !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.font-weight-bold {
+    font-weight: bold !important;
+}
+
+.lighter {
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.inner-no-padding {
+    --inner-padding-end: 7px !important;
+}
+
+.ion-color-primary {
+    --ion-color-base: #34B6FF !important;
+    --ion-color-base-rgb: rgb(255, 255, 255) !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: rgb(255, 255, 255) !important;
+    --ion-color-shade: #34B6FF !important;
+    --ion-color-tint: #34B6FF !important;
+}
+
+.ion-color-warning {
+    --ion-color-base: rgb(253, 157, 46) !important;
+    --ion-color-base-rgb: rgb(253, 157, 46) !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: rgb(253, 157, 46) !important;
+    --ion-color-shade: rgb(253, 157, 46) !important;
+    --ion-color-tint: rgb(253, 157, 46) !important;
+}
+
+.ion-color-mystic {
+    --ion-color-base: #29035f !important;
+    --ion-color-base-rgb: rgb(255, 255, 255) !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: rgb(255, 255, 255) !important;
+    --ion-color-shade: #29035f !important;
+    --ion-color-tint: #29035f !important;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+@for $i from 0 to 12 {
+    $j: $i + 1;
+
+    .flex-#{$j} {
+        flex: $j;
+    }
+
+    .mt-#{$i} {
+        margin-top:#{$i}em !important;
+    }
+
+    .ml-#{$i} {
+        margin-left:#{$i}em !important;
+    }
+
+    .mb-#{$i} {
+        margin-bottom:#{$i}em !important;
+    }
+
+    .mr-#{$i} {
+        margin-right:#{$i}em !important;
+    }
+
+    .mx-#{$i} {
+        margin-right:#{$i}em !important;
+        margin-left:#{$i}em !important;
+    }
+
+    .my-#{$i} {
+        margin-top:#{$i}em !important;
+        margin-bottom:#{$i}em !important;
+    }
+
+    .pt-#{$i} {
+        padding-top:#{$i}em !important;
+    }
+
+    .pl-#{$i} {
+        padding-left:#{$i}em !important;
+    }
+
+    .pb-#{$i} {
+        padding-bottom:#{$i}em !important;
+    }
+
+    .pr-#{$i} {
+        padding-right:#{$i}em !important;
+    }
+
+    .px-#{$i} {
+        padding-right:#{$i}em !important;
+        padding-left:#{$i}em !important;
+    }
+
+    .py-#{$i} {
+        padding-top:#{$i}em !important;
+        padding-bottom:#{$i}em !important;
+    }
+}
+
+.input-light-grey {
+    --placeholder-color: #383a3e;
+    background: whitesmoke;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: black;
+    padding-left: 10px !important;
+}
+
+.item-no-padding {
+    --inner-padding-end: 5px !important;
+    --padding-start: 5px !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+ion-datetime {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.list-order {
+    font-size: 11px !important;
+
+    h5 {
+        font-size: 11px !important;
+    }
+
+    .item {
+        padding: 10px 0px;
+        border-bottom: solid .5px whitesmoke;
+        display: flex;
+
+        &:last-child {
+            border-bottom: 0px;
+        }
+
+        .detail {
+            flex: 2;
+            max-width: 65%;
+        }
+
+        .button {
+            flex: 1;
+
+            ion-button {
+                letter-spacing: 0px;
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+.middle {
+    vertical-align: middle;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.fallback-empty {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+
+    .wrapper-empty {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        ion-img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        ion-label {
+            font-weight: 300;
+        }
+    }
+}
+
+@media print {
+    body {
+        position: static;
+        overflow: initial;
+    }
+
+    ion-nav {
+        overflow: initial !important;
+    }
+
+    .scroll-content {
+        position: relative;
+        overflow: visible !important;
+    }
+
+    ion-header {
+        display: none !important;
+    }
+
+    header nav,
+    footer {
+        display: none;
+    }
+
+    button {
+        display: none !important;
+    }
+
+    ion-fab {
+        display: none;
+    }
+
+    .pane {
+        position: initial;
+    }
+
+    p a {
+        word-wrap: break-word;
+    }
+}

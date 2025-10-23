@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Daftar Retur</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/retur">Buat Baru</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-no-padding">
+    <ion-item lines="full">
+      <ion-label class="font-weight-bold">Tanggal</ion-label>
+      <ion-label class="font-weight-bold">No Faktur</ion-label>
+      <ion-label class="font-weight-bold">No Retur</ion-label>
+      <ion-label class="font-weight-bold">Nominal</ion-label>
+    </ion-item>
+    <ion-item lines="full" *ngFor="let item of dataRetur" (click)="openDetailFaktur(item.id_retur)">
+      <ion-label>{{item.tgl}}</ion-label>
+      <ion-label>{{item.no_faktur}}</ion-label>
+      <ion-label>{{item.no_retur}}</ion-label>
+      <ion-label class="ion-text-right">{{item.total|rupiah}}</ion-label>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

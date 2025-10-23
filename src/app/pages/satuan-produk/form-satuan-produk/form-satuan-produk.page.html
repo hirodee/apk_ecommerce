@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Satuan Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input type="hidden" [(ngModel)]="satuan.id_satuan"></ion-input>
+  <ion-card class="ion-padding">
+    <ion-list class="list-input">
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">
+          Nama Satuan
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="satuan.satuan"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="saveSatuan()" expand="block" color="warning">
+      Simpan
+    </ion-button>
+  </ion-card>
+</ion-content>

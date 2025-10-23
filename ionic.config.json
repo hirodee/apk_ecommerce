@@ -1,0 +1,7 @@
+{
+  "name": "aipos_mobile_new",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

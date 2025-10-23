@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Laporan Penjualan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-label>Periode</ion-label>
+    <ion-list class="list-input">
+      <ion-item class="ion-no-padding">
+        <ion-input type="date" placeholder="Dari tanggal" [value]="currDate"></ion-input>
+        <ion-input type="date" placeholder="Sampai tanggal" [value]="currDate"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

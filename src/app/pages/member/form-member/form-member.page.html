@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pelanggan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list class="list-input">
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Kode</ion-label>
+      <ion-input type="text" placeholder="" [disabled]="true" [(ngModel)]="member.kode"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Nama</ion-label>
+      <ion-input type="text" placeholder="" [(ngModel)]="member.nama"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Alamat</ion-label>
+      <ion-input type="text" placeholder="" [(ngModel)]="member.alamat"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Telp</ion-label>
+      <ion-input type="text" placeholder="" [(ngModel)]="member.telp"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Tgl Lahir</ion-label>
+      <ion-input type="date" placeholder="" [(ngModel)]="member.tgl_lahir"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Diskon ( % )</ion-label>
+      <ion-input type="text" placeholder="" [(ngModel)]="member.diskon"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="save()" expand="block" color="primary">
+    Simpan
+  </ion-button>
+</ion-content>

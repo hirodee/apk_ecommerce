@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Retur Penjualan</ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="state == 'manual'" (click)="segmentChanged('faktur')">Cari Faktur</ion-button>
+      <ion-button *ngIf="state == 'faktur'" (click)="segmentChanged('manual')">Manual</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-faktur *ngIf="state == 'faktur'"></app-faktur>
+  <app-manual *ngIf="state == 'manual'"></app-manual>
+</ion-content>

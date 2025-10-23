@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <app-title [title]="'Daftar Piutang'" [searchPlaceholder]="'Cari piutang'" (onSearchChange)="onSearch($event)">
+    </app-title>
+  </ion-toolbar>
+  <ion-progress-bar type="indeterminate" color="primary" *ngIf="showProgressBar"></ion-progress-bar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="full" *ngFor="let item of dataPiutang" (click)="openPiutang(item)">
+      <ion-label>
+        <ion-label class="">{{item.no_faktur}}</ion-label>
+        <ion-label>{{item.pembeli}}</ion-label>
+      </ion-label>
+      <ion-label>
+        <ion-label class="ion-text-right">{{item.tanggal}}</ion-label>
+        <ion-label class="ion-text-right">{{item.sisa|rupiah}}</ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

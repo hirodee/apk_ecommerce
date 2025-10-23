@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Piutang</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="updatePiutang()">
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+      <!-- <ion-button (click)="deleteProduk()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Pembeli</ion-label>
+      <ion-label>{{piutang.pembeli}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>No Faktur</ion-label>
+      <ion-label>{{piutang.no_faktur}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tanggal</ion-label>
+      <ion-label>{{piutang.tanggal}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Jumlah Hutang</ion-label>
+      <ion-label>{{piutang.jumlah_hutang|rupiah}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Jumlah Bayar</ion-label>
+      <ion-label>{{piutang.jumlah_bayar|rupiah}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sisa</ion-label>
+      <ion-label>{{piutang.sisa|rupiah}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

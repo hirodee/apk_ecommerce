@@ -1,0 +1,27 @@
+.menu {
+    ion-img {
+        width: 100%;
+
+        &.poped-up {
+            width: 73px;
+            margin-top: -10px;
+        }
+    }
+
+    ion-col {
+        text-align: center;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+    }
+
+    ion-label {
+        margin-top: 5px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 13px;
+        text-align: center;
+    }
+}

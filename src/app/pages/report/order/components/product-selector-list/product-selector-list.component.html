@@ -1,0 +1,20 @@
+<ion-list>
+  <ion-item
+    *ngFor="let item of productSelectorStore.products"
+    (click)="selectProduct(item)"
+  >
+    <ion-img
+      slot="start"
+      [src]="item.url_gambar ? item.url_gambar : defaultProductImage"
+    ></ion-img>
+    <div>
+      <div style="display: flex; flex-direction: column; padding: 8px 0px">
+        <ion-label>{{ item.nama_produk }}</ion-label>
+        <small class="text-muted">{{ item.barcode }}</small>
+        <small class="text-muted"
+          >Stok: {{ item.stok }} Hrg: {{ item.harga_1 | rupiah }}</small
+        >
+      </div>
+    </div>
+  </ion-item>
+</ion-list>

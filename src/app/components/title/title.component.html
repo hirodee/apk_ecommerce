@@ -1,0 +1,11 @@
+<div class="flex" style="display:flex">
+  <ion-title *ngIf="!itSearch" style="order:1;text-transform:capitalize">{{title}}</ion-title>
+  <ion-buttons style="order:3" slot="end">
+    <ion-button (click)="toggleSearch()">
+      <ion-icon slot="icon-only" *ngIf="!itSearch" name="search"></ion-icon>
+      <ion-icon slot="icon-only" *ngIf="itSearch" name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-searchbar [placeholder]="searchPlaceholder" (ionChange)="onSearch($event.target.value)" *ngIf="itSearch"
+    [debounce]="250" showCancelButton="250"></ion-searchbar>
+</div>

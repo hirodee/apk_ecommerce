@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="transparent" class="transparent" [class.ion-color-primary]="showToolbar"
+    [class.header-ios]="isIOS">
+    <ion-title>
+      <ion-img src="/assets/svg/logo.svg" class="logo"></ion-img>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/pengaturan" class="profile">
+        <img src="/assets/icon/favicon.png" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <div class="container">
+    <div class="header" padding>
+      <div class="greeting">
+        <ion-label>Hi</ion-label>
+        <h3>{{state.users.first_name}}</h3>
+      </div>
+    </div>
+    <div class="summary" [ngClass]="this.state.users.level == '1' ? 'summary_admin' : ''">
+      <div class="summary-body">
+          
+        <ion-row>
+          <ion-item lines="none">
+            <ion-label class="d-flex ion-align-items-center" style="margin-top:8px;">
+              <ion-img [src]="'/assets/svg/info.svg'" style="height:15px;margin-right:5px;"></ion-img>
+              <ion-label>Informasi Penjualan</ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6" size-md="3" size-lg="3" *ngIf="this.state.users.level == '1'" >
+            <ion-item lines="none">
+              <ion-label>
+                <ion-label class="color-primary font-weight-bold">Total Pembelian</ion-label>
+                <ion-label class="font-weight-bold text-large">Rp {{summary.total_pembelian|rupiah}}</ion-label>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6" size-md="3" size-lg="3">
+            <ion-item lines="none">
+              <ion-label>
+                <ion-label class="color-primary font-weight-bold">Hari Ini</ion-label>
+                <ion-label class="font-weight-bold text-large">Rp {{summary.laba_hari_ini|rupiah}}</ion-label>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6" size-md="3" size-lg="3" *ngIf="this.state.users.level == '1'">
+            <ion-item lines="none">
+              <ion-label>
+                <ion-label class="color-primary font-weight-bold">Bulan Ini</ion-label>
+                <ion-label class="font-weight-bold text-large">Rp {{summary.laba_bulan_ini|rupiah}}</ion-label>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6" size-md="3" size-lg="3" *ngIf="this.state.users.level == '1'">
+            <ion-item lines="none">
+              <ion-label>
+                <ion-label class="color-primary font-weight-bold">Total</ion-label>
+                <ion-label class="font-weight-bold text-large">Rp {{summary.laba_total|rupiah}}</ion-label>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+      </div>
+    </div>
+    <div class="wrapper" padding>
+
+      <ion-row class="menu" *ngFor="let chunkMenu of menu">
+        <ion-col size="2" size-xs="3" size-md="2" (click)="openLink(item.path)" *ngFor="let item of chunkMenu">
+          <ion-img [src]="item.img"></ion-img>
+          <ion-label>{{item.name}}</ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-card mode="ios" class="ion-padding ion-no-margin ion-margin-top">
+        <div class="d-flex ion-justify-content-between ion-align-items-center">
+          <h4 class="title ion-no-margin">
+            Penjualan Hari Ini
+          </h4>
+          <ion-text color="primary" class="ion-text-right" routerLink="/riwayat/order">
+            Lainnya
+          </ion-text>
+        </div>
+
+        <ion-list class="ion-no-padding list-penjualan">
+          <ion-item *ngFor="let item of listOrder" class="ion-no-padding inner-no-padding"
+            (click)="openDetail(item.id)">
+            <ion-label>
+              <ion-label class="">
+                <ion-icon name="list-box"></ion-icon> {{item.no}}
+              </ion-label>
+              <ion-label>{{item.nama}} - {{item.alamat}}</ion-label>
+            </ion-label>
+            <ion-label>
+              <ion-label class="ion-text-right ">{{item.tanggal_jam}}</ion-label>
+              <ion-label class="ion-text-right">{{item.nominal}}</ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <div *ngIf="listOrder.length == 0" class="fallback-empty">
+          <div class="wrapper-empty">
+            <ion-img src="/assets/svg/icon-cart.svg"></ion-img>
+            <ion-text>Belum ada order hari ini</ion-text>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

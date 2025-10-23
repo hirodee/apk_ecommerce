@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>LAPOR AKTIVITAS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-top>
+
+  <!-- Product list -->
+  <div class="popup" *ngIf="showProduct">
+    <div class="popup-header bg-primary">
+      <ion-searchbar placeholder="Cari Produk" inputmode="email" type="decimal"
+        (ionChange)="getProduct($event.target.value)" [debounce]="250"></ion-searchbar>
+      <div class="btn-close" (click)="openProduct()">
+        <ion-icon name="close"></ion-icon>
+      </div>
+    </div>
+    <ion-progress-bar type="indeterminate" *ngIf="showProgressBar"></ion-progress-bar>
+    <div class="popup-body">
+      <ion-list class="ion-no-padding">
+        <ion-item lines="full" *ngFor="let item of dataProduct" (click)="selectProduct(item)">
+          <!-- <ion-avatar></ion-avatar> -->
+          <div>
+            {{item.nama_produk}}
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="popup with-backdrop" *ngIf="selectedProduct">
+    <div class="popup-wrapper">
+      <div class="popup-header">
+        {{selectedProduct.nama_produk}}
+        <div class="btn-close" (click)="selectProduct(false)">
+          <ion-icon name="close"></ion-icon>
+        </div>
+      </div>
+      <div class="popup-body">
+        <ion-row>
+          <ion-col lines="none">
+            <ion-select placeholder="Pilih Media" [(ngModel)]="selectedMedia">
+              <ion-select-option [value]="item.id" *ngFor="let item of pilMedia">{{item.media}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col lines="none">
+            <ion-input type="number" [(ngModel)]="qty" placeholder="Masukan Jumlah"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button color="warning" size="medium" expand="block" mode="ios" (click)="addToTemp()">Tambah
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="validateReport" (ngSubmit)="saveActivity()">
+    <ion-list>
+      <ion-item lines="none" style="padding:5px">
+        <div class="w-100">
+          <ion-label position="stack">Tanggal Aktifitas</ion-label>
+          <ion-item>
+            <ion-select placeholder="Pilih Tanggal" class="w-100" formControlName="tanggal" [(ngModel)]="tanggal">
+              <ion-select-option *ngFor="let item of tanggalMap" [value]="item">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-text color="danger" class="form-error"
+            *ngIf="validateReport.controls.tanggal.invalid && validateReport.controls.tanggal.touched">
+            Pilih tanggal
+          </ion-text>
+        </div>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-row>
+          <ion-col size="4">
+            <ion-label position="stack">Leads</ion-label>
+            <ion-input class="input-light-grey" formControlName="leads" type="number"></ion-input>
+            <ion-text color="danger" class="form-error"
+              *ngIf="validateReport.controls.leads.invalid && validateReport.controls.leads.touched">
+              Masukan leads
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-label position="stack">Totalan</ion-label>
+            <ion-input class="input-light-grey" formControlName="totalan" type="number"></ion-input>
+            <ion-text color="danger" class="form-error"
+              *ngIf="validateReport.controls.totalan.invalid && validateReport.controls.totalan.touched">
+              Masukan totalan
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-label position="stack">Closing</ion-label>
+            <ion-input class="input-light-grey" formControlName="closing" type="number" [disabled]="true"></ion-input>
+            <ion-text color="danger" class="form-error"
+              *ngIf="validateReport.controls.closing.invalid && validateReport.controls.closing.touched">
+              Masukan closing
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <ion-card mode="ios" class="mb-0" *ngFor="let item of pilMedia;let i = index" [color]="item.scheme">
+      <ion-card-header>
+        {{item.media}}
+      </ion-card-header>
+      <ion-card-content>
+        <div class="d-flex">
+          <div class="flex-1">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th>Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let it of dataQty[i].produk;let id = index">
+                  <td>{{it.nama_produk}}</td>
+                  <td>
+                    <ion-input type="number" (ionChange)="changeQty(i,id,$event.target.value)" [value]="it.qty">
+                    </ion-input>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="fab" (click)="openProduct()">
+      <ion-icon name="add" color="light"></ion-icon>
+    </div>
+
+    <div padding>
+      <ion-button expand="block" mode="ios" color="mystic" type="submit" [disabled]="!this.validateReport.valid">SIMPAN
+      </ion-button>
+    </div>
+  </form>
+  <div class="text-center pb-2">
+    <ion-text>
+      &copy; AIPOS System by Dieng Cyber
+    </ion-text>
+  </div>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Update Stok Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list class="list-input">
+    <ion-item class="ion-no-padding" lines="full">
+      <ion-label>Nama Produk</ion-label>
+      <ion-label>{{stok.nama_produk}}</ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding" lines="full">
+      <ion-label>Stok Sekarang</ion-label>
+      <ion-label>{{stok.stok}}</ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding" lines="full">
+      <ion-label position="stacked">Harga Satuan Beli</ion-label>
+      <ion-input type="number" placeholder="" [(ngModel)]="stok.harga_satuan"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding" lines="full">
+      <ion-label position="stacked">Tambah Stok</ion-label>
+      <ion-input type="number" placeholder="" [(ngModel)]="stok.tambah_stok"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="save()" expand="block">
+    Simpan
+  </ion-button>
+</ion-content>

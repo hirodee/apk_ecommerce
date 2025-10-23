@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pengaturan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="header-top ion-color-primary">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2">
+        <ion-avatar style="height:50px;width:50px">
+          <ion-img [src]="state.users.url_foto"></ion-img>
+        </ion-avatar>
+      </ion-col>
+      <ion-col>
+        <div class="d-flex flex-column">
+          <h5 class="ion-no-margin ion-no-margin ion-margin-end">{{state.users.first_name}}</h5>
+          <h5 class="ion-no-margin ion-no-margin ion-margin-end">{{state.users.email}}</h5>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-list>
+    <ion-item lines="full" routerLink="/pengaturan/profile">
+      <ion-label>Profile</ion-label>
+    </ion-item>
+    <ion-item lines="full" routerLink="/pengaturan/password">
+      <ion-label>Ubah Password</ion-label>
+    </ion-item>
+    <ion-item lines="full" (click)="auth.logout()">
+      <ion-label>
+        Logout
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

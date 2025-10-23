@@ -1,0 +1,71 @@
+<ion-header class="header">
+  <ion-toolbar color="transparent" class="transparent" [class.ion-color-primary]="showToolbar" [class.shadow-head]="showToolbar">
+    <ion-buttons slot="start">
+      <ion-back-button [class.white-button]="!showToolbar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="updateProduk()">
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+      <!-- <ion-button (click)="deleteProduk()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <ion-row>
+    <ion-col size="12" size-xs="12" size-md="4" class="col-product-image">
+      <div class="product-image">
+        <ion-img [src]="(produk.url_gambar)?produk.url_gambar:defaultProductImage"></ion-img>
+      </div>
+    </ion-col>
+
+    <ion-col size="12" size-xs="12" size-md="8" class="col-product-detail">
+      <div class="product-name">
+        {{produk.nama_produk}}
+      </div>
+      <div class="product-description">
+        {{produk.deskripsi}}
+      </div>
+      
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>Kategori</ion-label>
+              <ion-label>{{produk.nama_kategori}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Harga Jual</ion-label>
+              <ion-label>{{produk.harga_1|rupiah}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Harga Grosir</ion-label>
+              <ion-label>{{produk.harga_2|rupiah}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Harga Member</ion-label>
+              <ion-label>{{produk.harga_3|rupiah}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Terjual</ion-label>
+              <ion-label>{{produk.dibeli}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Diskon</ion-label>
+              <ion-label>{{produk.diskon}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>Minimal Grosir</ion-label>
+              <ion-label>{{produk.mingros}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

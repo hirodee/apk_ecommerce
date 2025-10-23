@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <app-title title="Pelanggan" searchPlaceholder="Cari dengan nama" (onSearchChange)="onSearch($event)"></app-title>
+  </ion-toolbar>
+  <ion-progress-bar type="indeterminate" color="primary" *ngIf="showProgressBar"></ion-progress-bar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-label class="font-weight-bold">
+        Nama
+      </ion-label>
+      <ion-label class="font-weight-bold">
+        Alamat
+      </ion-label>
+      <ion-label class="font-weight-bold">
+        HP
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full" *ngFor="let item of dataMember" (click)="openDetail(item)">
+      <ion-label>{{item.nama}}</ion-label>
+      <ion-label>{{item.alamat}}</ion-label>
+      <ion-label>{{item.telp}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/form-member">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

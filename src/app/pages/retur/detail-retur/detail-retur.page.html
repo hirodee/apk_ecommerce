@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Retur</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Pembayaran</ion-label>
+      <ion-label>{{(detailRetur.pembayaran == 1)?"TUNAI":"KREDIT"}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Pembeli
+      </ion-label>
+      <ion-label>
+        {{(detailRetur.nama_kustomer)?detailRetur.nama_kustomer:detailRetur.bukan_member}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Alamat
+        <p>{{detailRetur.alamat_pembeli}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tanggal Order</ion-label>
+      <ion-label>{{detailRetur.tgl_order}} {{detailRetur.jam_order}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nominal</ion-label>
+      <ion-label>{{detailRetur.nominal|rupiah}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <h4 class="font-weight-bold">Detail Barang</h4>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of detailRetur.data_detail">
+      <ion-label>
+        <ion-label class="font-weight-bold">{{item.nama_produk}}</ion-label>
+        <ion-label class="d-flex ion-justify-content-between">
+          <ion-label>Jumlah</ion-label>
+          <ion-label>{{item.jumlah}}</ion-label>
+        </ion-label>
+        <ion-label class="d-flex ion-justify-content-between">
+          <ion-label>Subtotal</ion-label>
+          <ion-label>{{item.subtotal|rupiah}}</ion-label>
+        </ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

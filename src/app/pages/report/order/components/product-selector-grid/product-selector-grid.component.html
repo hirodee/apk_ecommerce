@@ -1,0 +1,29 @@
+<ion-row>
+  <ion-col
+    size="3"
+    size-xs="6"
+    size-md="4"
+    size-lg="4"
+    *ngFor="let item of productSelectorStore.products"
+    (click)="selectProduct(item)"
+  >
+    <div class="item-product v2">
+      <div class="item-thumbnail">
+        <ion-img
+          [src]="item.url_gambar ? item.url_gambar : defaultProductImage"
+        ></ion-img>
+      </div>
+      <div class="item-stok-label">
+        <ion-label
+          >Stok: {{ item.stok }} Hrg: {{ item.harga_1 | rupiah }}</ion-label
+        >
+      </div>
+      <div class="item-text" style="font-size: 12px; text-align: center">
+        <ion-label>{{ item.barcode }}</ion-label>
+      </div>
+      <div class="item-text" style="padding: 0px; text-align: center">
+        <ion-label>{{ item.nama_produk }}</ion-label>
+      </div>
+    </div>
+  </ion-col>
+</ion-row>

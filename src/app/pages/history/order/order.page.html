@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!itSearch">Riwayat Penjualan</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="toggleSearch()">
+        <ion-icon slot="icon-only" *ngIf="!itSearch" name="search"></ion-icon>
+        <ion-icon slot="icon-only" *ngIf="itSearch" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar placeholder="Cari" (ionBlur)="searchChange($event)" [value]="valueSearch" *ngIf="itSearch">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding-top ion-padding-start ion-padding-end">
+    <ion-label>Periode</ion-label>
+    <ion-list lines="full">
+      <ion-item class="ion-no-padding input-group">
+        <ion-input type="date" [(ngModel)]="queryParams.dari" placeholder="Dari tanggal" [value]="currDate"></ion-input>
+        <ion-input type="date" [(ngModel)]="queryParams.sampai" placeholder="Sampai tanggal" [value]="currDate">
+        </ion-input>
+        <ion-button (click)="subData()" expand="block" fill="clear" shape="round">
+          Proses
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of listOrder" (click)="openDetail(item.id)">
+      <ion-label>
+        <ion-label class="">
+          <ion-icon name="list-box"></ion-icon> {{item.no}}
+        </ion-label>
+        <ion-label>{{item.nama}} - {{item.alamat}}</ion-label>
+      </ion-label>
+      <ion-label>
+        <ion-label class="ion-text-right ">{{item.tanggal_jam}}</ion-label>
+        <ion-label class="ion-text-right">{{item.nominal}}</ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- <div padding class="list-order">
+    <div class="item" >
+      <div class="detail">
+        <h5 no-margin>No: {{item.no}}</h5>
+        <ion-label class="ion-text-wrap" style="margin-right:5px;line-height:1.1em;" [innerHtml]="item.keterangan">
+        </ion-label>
+      </div>
+    </div>
+  </div> -->
+</ion-content>

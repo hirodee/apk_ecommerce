@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Penjualan</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toPrint(detailOrder.id_orders)">
+        <ion-icon name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Pembayaran</ion-label>
+      <ion-label>{{(detailOrder.pembayaran == 1)?"TUNAI":"KREDIT"}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Pembeli
+      </ion-label>
+      <ion-label>
+        {{(detailOrder.nama_kustomer)?detailOrder.nama_kustomer:detailOrder.bukan_member}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Alamat
+        <p>{{detailOrder.alamat_pembeli}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tanggal Order</ion-label>
+      <ion-label>{{detailOrder.tgl_order}} {{detailOrder.jam_order}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nominal</ion-label>
+      <ion-label>{{detailOrder.nominal|rupiah}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Jumlah Bayar</ion-label>
+      <ion-label>{{detailOrder.bayar|rupiah}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Kembalian</ion-label>
+      <ion-label>{{detailOrder.kembali|rupiah}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <h4 class="font-weight-bold">Detail Barang</h4>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of detailOrder.detail_order">
+      <ion-label>
+        <ion-label class="font-weight-bold">{{item.nama_produk}}</ion-label>
+        <ion-label class="d-flex ion-justify-content-between">
+          <ion-label>Jumlah</ion-label>
+          <ion-label>{{item.jumlah}}</ion-label>
+        </ion-label>
+        <ion-label class="d-flex ion-justify-content-between">
+          <ion-label>Subtotal</ion-label>
+          <ion-label>{{item.subtotal|rupiah}}</ion-label>
+        </ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

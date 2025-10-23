@@ -1,0 +1,13 @@
+<ion-header *ngIf="!postInstallation">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pengaturan Server</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" *ngIf="!postInstallation">
+  <app-update></app-update>
+</ion-content>
+
+<app-post-installation *ngIf="postInstallation"></app-post-installation>

@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Produk</ion-title>
+  </ion-toolbar>
+  <ion-progress-bar type="indeterminate" color="primary" *ngIf="showProgressBar"></ion-progress-bar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list class="list-input">
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Barcode</ion-label>
+      <ion-input [value]="produk.barcode" [(ngModel)]="produk.barcode" [disabled]="true" placeholder="Barcode">
+      </ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label>Kategori</ion-label>
+      <ion-select [(ngModel)]="produk.id_kategori" placeholder="Pilih Kategori">
+        <ion-select-option *ngFor="let item of dataKategori" [value]="item.id_kategori_2">
+          {{item.nama_kategori}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label>Satuan</ion-label>
+      <ion-select [(ngModel)]="produk.satuan" placeholder="Pilih Satuan">
+        <ion-select-option *ngFor="let item of dataSatuan" [value]="item.id_satuan">{{item.satuan}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Nama Produk</ion-label>
+      <ion-input [(ngModel)]="produk.nama_produk"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Deskripsi</ion-label>
+      <ion-input [(ngModel)]="produk.deskripsi"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Harga Umum</ion-label>
+      <ion-input type="number" [(ngModel)]="produk.harga_1"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Harga Grosir</ion-label>
+      <ion-input type="number" [(ngModel)]="produk.harga_2"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Harga Member</ion-label>
+      <ion-input type="number" [(ngModel)]="produk.harga_3"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Berat</ion-label>
+      <ion-input type="number" [(ngModel)]="produk.berat"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Pembelian minimal grosir</ion-label>
+      <ion-input type="number" [(ngModel)]="produk.mingros"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Diskon ( % )</ion-label>
+      <ion-input type="number" [(ngModel)]="produk.diskon"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Rak</ion-label>
+      <ion-input [(ngModel)]="produk.rak"></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label>Gambar</ion-label>
+      <app-file-picker [defaultFile]="produk.old_url_gambar" (onFilePicked)="setImage($event)"></app-file-picker>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="save()">Simpan</ion-button>
+</ion-content>

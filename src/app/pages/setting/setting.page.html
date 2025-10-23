@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pengaturan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-label>Saat Retur Update Stok</ion-label>
+      <ion-toggle value="1" [(ngModel)]="state.users.update_stok_on_retur" (ionChange)="setReturUpdateStok()">
+      </ion-toggle>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Cetak Nota Penjualan</ion-label>
+      <ion-toggle [(ngModel)]="state.users.print_nota" (ionChange)="setPrintOption($event)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Format Nota Printer</ion-label>
+      <ion-select [(ngModel)]="state.users.print_format" placeholder="Pilih Format"
+        (ionChange)="setPrintFormat($event.target.value)">
+        <ion-select-option value="kecil">Print nota kecil</ion-select-option>
+        <ion-select-option value="besar">Print nota besar</ion-select-option>
+        <ion-select-option value="praktis">Print nota praktis kecil</ion-select-option>
+        <ion-select-option value="praktis2">Print nota praktis besar</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label routerLink="/server-setting">Pengaturan Server</ion-label>
+    </ion-item>
+    <ion-item-divider lines="none">
+      <ion-label>Pengaturan Produk</ion-label>
+    </ion-item-divider>
+    <ion-item routerLink="/kategori-produk" lines="full">
+      <ion-label>Kategori Produk</ion-label>
+    </ion-item>
+    <ion-item routerLink="/satuan-produk" lines="full">
+      <ion-label>Satuan Produk</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

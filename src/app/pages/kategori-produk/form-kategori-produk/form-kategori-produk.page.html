@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Kategori Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input type="hidden" [(ngModel)]="kategori.id_kategori_2"></ion-input>
+  <ion-card class="ion-padding">
+    <ion-list class="list-input">
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">
+          Nama Kategori
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="kategori.nama_kategori"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="saveKategori()" expand="block" color="warning">
+      Simpan
+    </ion-button>
+  </ion-card>
+</ion-content>

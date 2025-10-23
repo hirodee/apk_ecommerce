@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Member</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="updateMember()">
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteMember()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-label>Nama</ion-label>
+      <ion-label>{{detailMember.nama}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Kode</ion-label>
+      <ion-label>{{detailMember.kode}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>
+        <ion-label>Alamat</ion-label>
+        <p>{{detailMember.alamat}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Nomor HP / Telepon</ion-label>
+      <ion-label>{{detailMember.telp}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Tanggal Lahir</ion-label>
+      <ion-label>{{detailMember.tgl_lahir}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Diskon</ion-label>
+      <ion-label>{{detailMember.diskon}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Deposit</ion-label>
+      <ion-label>{{detailMember.deposit}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

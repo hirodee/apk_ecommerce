@@ -1,0 +1,125 @@
+
+.transparent {
+    --background: transparent;
+    --ion-background-color: transparent;
+    --background-color: transparent;
+    --ion-color-base: transparent;
+    --color: #fff;
+    background: transparent;
+    background-color: transparent;
+    position: fixed;
+    box-shadow: 0px 0px 0px 0px #ccc;
+    --padding-start: 0px;
+    --padding-end: 0px;
+
+    &.ion-color-success {
+        i.icon {
+            background: white !important;
+        }
+    }
+
+    &.sticky {
+        position: sticky;
+        top: 0px;
+    }
+}
+
+
+.product-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-img {
+        min-height: 40vh;
+        max-height: 80vh;
+        object-fit: cover;
+    }
+}
+
+.col-product-image {
+    padding: 0px;
+}
+
+.product-detail {
+    margin: 16px;
+    border: 1px solid #99C;
+    border-radius: 5px;
+}
+
+.shadow-head {
+    box-shadow: 0px 0px 3px 0px #035;
+}
+
+.white-button {
+    background: rgba(255,255,255,.7);
+    border-radius: 50%;
+    margin: 6px;
+}
+
+ion-card-content {
+    padding: 0px;
+
+    ion-list {
+        padding-top: 0px;
+    }
+}
+
+.product-name {
+    font-size: 22px;
+    padding-top: 17px;
+    padding-left: 12px;
+}
+
+.product-name::first-letter {
+    text-transform: uppercase;
+}
+
+.product-description {
+    font-size: 13px;
+    padding-top:3px;
+    padding-left: 13px;
+    padding-bottom: 7px;
+}
+
+@media only screen and (min-width: 768px) {
+    .transparent {
+        --background: var(--ion-color-primary);
+        --ion-background-color: var(--ion-color-primary);
+        --background-color: var(--ion-color-primary);
+        --ion-color-base: var(--ion-color-primary);
+        --color: #fff;
+        background: var(--ion-color-primary);
+        background-color: var(--ion-color-primary);
+        position: relative;
+        box-shadow: 0px 0px 0px 0px #ccc;
+        --padding-start: 0px;
+        --padding-end: 0px;
+    
+        &.ion-color-success {
+            i.icon {
+                background: white !important;
+            }
+        }
+    
+        &.sticky {
+            position: sticky;
+            top: 0px;
+        }
+    }
+
+    .shadow-head {
+        box-shadow: none;
+    }
+    
+    .white-button {
+        background: none;
+        border-radius: 0;
+        margin: 0px;
+    }
+
+    .col-product-image {
+        padding-left: 23px;
+        padding-top: 23px;
+    }
+}

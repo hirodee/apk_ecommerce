@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <app-title [title]="pageTitle" [searchPlaceholder]="'Cari Produk'" (onSearchChange)="onSearch($event)">
+    </app-title>
+  </ion-toolbar>
+  <ion-progress-bar type="indeterminate" color="primary" *ngIf="showProgressBar"></ion-progress-bar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="product-panel">
+    <ion-row>
+      <ion-col size="3" size-xs="6" size-md="4" size-lg="2" *ngFor="let item of dataStok; trackBy:trackByFn" (click)="formStok(item)">
+        <div class="item-product">
+          <div class="item-thumbnail">
+            <ion-img [src]="(item.url_gambar)?item.url_gambar:defaultProductImage"></ion-img>
+          </div>
+          <div class="item-text">
+            <ion-label>{{item.nama_produk}}</ion-label>
+            <div style="margin-top:6px;"><ion-badge color="primary">Stok: {{(item.stok)?item.stok:0}} {{item.satuan_produk}}</ion-badge></div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- <ion-list>
+    <ion-item lines="full" *ngFor="let item of dataStok; trackBy:trackByFn" (click)="formStok(item)">
+      <ion-avatar>
+        <ion-img [src]="(item.url_gambar)?item.url_gambar:defaultProductImage"></ion-img>
+      </ion-avatar>
+      <ion-label class="ion-padding-start" style="flex:3">
+        {{item.nama_produk}}
+      </ion-label>
+      <ion-label class="ion-text-right">{{(item.stok)?item.stok:0}} {{item.satuan_produk}}</ion-label>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Memuat lebih banyak produk...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

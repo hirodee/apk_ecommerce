@@ -1,0 +1,9 @@
+<div class="d-flex ion-align-items-center">
+  <div style="height:28px;width:28px;border-radius: 5px;overflow: hidden;border: solid 2px var(--ion-color-primary);">
+    <ion-img [src]="(defaultFile)?defaultFile:images.path" style="height:28px;width:28px;object-fit:cover"></ion-img>
+  </div>
+  <ion-button fill="clear" expand="block" fill="outline" (click)="selectImage()">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    Pilih Gambar
+  </ion-button>
+</div>

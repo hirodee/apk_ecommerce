@@ -1,0 +1,168 @@
+$darkgrey:#383a3e;
+$lightgrey:#efefef;
+
+ion-page.app-auth {
+	// background-image: url('../../assets/images/src_images_bglogin.png');
+}
+
+ion-page.app-auth>ion-content {
+	background-color: transparent;
+}
+
+.page {
+	width: 100%;
+	height: 100%;
+	float: left;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	background: #00283E;
+
+	.logo {
+		width: 50vw;
+		// height: 35px;
+		float: left;
+		margin: 20px;
+	}
+
+	.form-auth {
+		width: 100%;
+		float: left;
+		flex: 25;
+
+		.f-margin {
+			margin-left: 25px;
+			margin-right: 25px;
+			margin-bottom: 12px;
+
+			ion-input {
+				--padding-start: 13px;
+				--padding-end: 13px;
+				--padding-top: 13px;
+				--padding-bottom: 13px;
+				--placeholder-color: $darkgrey;
+				--placeholder-opacity: 1;
+				text-align: left;
+				background: $lightgrey;
+				color: $darkgrey;
+				border-radius: 8px 8px 8px 8px;
+				--border-radius: 8px 8px 8px 8px;
+				// box-shadow: 0px 0px 3px 0px #888;
+				font-size: 15px;
+			}
+		}
+
+		.f-margin-btn {
+			float: left;
+			width: 100%;
+
+			.masuk {
+				margin-left: 23px;
+				margin-right: 23px;
+				margin-bottom: 12px;
+				--padding-top: 22px;
+				--padding-bottom: 22px;
+				--background: #00ce68;
+				--color: $darkgrey;
+				--border-radius: 8px 8px 8px 8px;
+			}
+
+			.telp {
+				margin-left: 23px;
+				margin-right: 23px;
+				margin-bottom: 12px;
+				--padding-top: 22px;
+				--padding-bottom: 22px;
+				--background: red;
+				--color: $darkgrey;
+				--border-radius: 8px 8px 8px 8px;
+			}
+
+			.fb {
+				margin-left: 23px;
+				margin-right: 23px;
+				margin-bottom: 12px;
+				--padding-top: 22px;
+				--padding-bottom: 22px;
+				--background: #3b5998;
+				--color: #fff;
+				--border-radius: 8px 8px 8px 8px;
+			}
+		}
+
+		.k-margin {
+			width: 100%;
+			float: left;
+			text-align: center;
+			color: $darkgrey;
+
+			p {
+				margin-top: 40px;
+				margin-bottom: 30px;
+				font-family: calibri;
+			}
+		}
+	}
+
+	.footer {
+		flex: 1;
+	}
+}
+
+.text-info {
+	text-align: left;
+	padding: 20px;
+
+	h1 {
+		font-weight: bolder;
+		color: white;
+		margin-bottom: 0px;
+	}
+
+	label {
+		color: #adadad;
+		text-align: left;
+	}
+}
+
+.f-group {
+	text-align: left;
+	color: $darkgrey;
+	margin: 0px 20px 20px 20px !important;
+
+	ion-input {
+		margin-top: 5px;
+	}
+}
+
+.bottomwave {
+	background-image: url('public/assets/png/bottomwave.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	min-height: 180px;
+}
+
+@media only screen and (min-width: 500px) {
+	.page {
+		padding: 42px;
+
+		.logo {
+			width: 230px;
+		}
+	}
+
+	.bottomwave {
+		min-height: 400px;
+	}
+}
+
+@media only screen and (min-width: 900px) {
+	.bottomwave {
+		min-height: 200px;
+	}
+}

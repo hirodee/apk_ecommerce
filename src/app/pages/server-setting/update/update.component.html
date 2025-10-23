@@ -1,0 +1,12 @@
+<ion-card class="ion-padding">
+  <ion-list class="list-input">
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">URL Server</ion-label>
+      <ion-input [(ngModel)]="state.url_server" type="text" placeholder="URL Server : http://192.168.100.xx">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="save()" expand="block">
+    Simpan
+  </ion-button>
+</ion-card>

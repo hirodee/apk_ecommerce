@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="no-shadow" color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Laporan Penjualan</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="onClick()">
+        <ion-icon slot="start" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="jumbotron ion-padding">
+  </div>
+  <div class="chart-wrapper">
+    <ion-card id="chartBulanIni" mode="ios">
+      <div class="d-flex ion-justify-content-between ion-padding-end ion-padding-start ion-padding-top">
+        <ion-label>Laporan Penjualan</ion-label>
+        <ion-select [(ngModel)]="currentState.chart_penjualan" (ionChange)="getDataChart($event.target.value)"
+          placeholder="Rentang Waktu" class="ion-no-padding">
+          <ion-select-option value="today">Hari Ini</ion-select-option>
+          <ion-select-option value="thismonth">Bulan Ini</ion-select-option>
+        </ion-select>
+      </div>
+      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions" [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+        [xaxis]="chartOptions.xaxis"></apx-chart>
+      <ion-progress-bar type="indeterminate" color="primary" *ngIf="showProgressBar"></ion-progress-bar>
+    </ion-card>
+  </div>
+
+  <ion-card mode="ios" class="ion-padding">
+    <div class="d-flex ion-justify-content-between">
+      <ion-label>Produk Terlaris</ion-label>
+      <ion-select [(ngModel)]="currentState.terlaris" (ionChange)="getProdukTerlaris($event.target.value)"
+        placeholder="Rentang Waktu" class="ion-no-padding">
+        <ion-select-option value="today">Hari Ini</ion-select-option>
+        <ion-select-option value="alltime">Semua Waktu</ion-select-option>
+      </ion-select>
+    </div>
+    <ion-list>
+      <ion-item class="ion-no-padding" *ngFor="let item of dataProdukTerlaris">
+        <ion-label style="flex:4">{{item.nama_produk}}</ion-label>
+        <ion-label class="color-primary ion-text-right" style="flex:1">
+          {{item.dibeli}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card mode="ios" class="ion-padding">
+    <div class="d-flex ion-justify-content-between">
+      <ion-label>Penjualan Terakhir</ion-label>
+      <!-- <ion-label>Bulan Ini</ion-label> -->
+    </div>
+    <ion-list>
+      <ion-item class="ion-no-padding" *ngFor="let item of dataPenjualanTerakhir">
+        <ion-label>
+          <ion-label>No Faktur</ion-label>
+          <ion-label>
+            {{item.no_faktur}}
+          </ion-label>
+        </ion-label>
+        <ion-label class="color-primary ion-text-right">
+          <ion-label>
+            {{item.tgl_order}}
+          </ion-label>
+          <ion-label>
+            {{item.nominal|rupiah}}
+          </ion-label>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

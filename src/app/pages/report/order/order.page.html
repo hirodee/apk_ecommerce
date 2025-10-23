@@ -1,0 +1,627 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!id">PENJUALAN</ion-title>
+    <ion-title *ngIf="id">UBAH ORDER</ion-title>
+    <ion-buttons slot="end">
+      <ion-chip (click)="toHariIni()">Hari ini</ion-chip>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <ion-row>
+    <ion-col size="12" size-md="7" size-lg="7">
+      <div class="summary">
+        <div class="summary-body">
+          <h5>TOTAL</h5>
+          <h4>{{total|rupiah}}</h4>
+        </div>
+      </div>
+      <div class="d-flex flex-between p-10 py-0">
+        <div *ngIf="selectedMember && isMember">
+          <ion-button size="small" color="success" mode="ios">
+            <ion-icon name="person"></ion-icon>
+            <label> {{selectedMember.nama}}</label>
+          </ion-button>
+          <ion-button size="small" color="success" mode="ios">
+            <ion-icon name="pricetags"></ion-icon>
+            <label> {{selectedMember.diskon}} %</label>
+          </ion-button>
+        </div>
+        <div></div>
+        <ion-button
+          size="small"
+          color="light"
+          mode="ios"
+          (click)="setDisplay()"
+        >
+          <ion-label *ngIf="!showDetail">Detail Pesanan</ion-label>
+          <ion-label *ngIf="showDetail">Hide Detail Pesanan</ion-label>
+        </ion-button>
+      </div>
+      <!-- End product list -->
+      <form [formGroup]="validateOrder" (ngSubmit)="submitOrder()">
+        <!-- popup bayar -->
+        <div class="popup with-backdrop" *ngIf="showBayar">
+          <div class="popup-wrapper">
+            <div class="popup-header">
+              <label>Total</label>
+              <label>{{total | rupiah}}</label>
+              <div class="btn-close" (click)="openBayar()">
+                <ion-icon name="close"></ion-icon>
+              </div>
+            </div>
+            <div class="popup-body">
+              <ion-row>
+                <ion-col size="6">
+                  <ion-label>Bayar</ion-label>
+                  <ion-input
+                    placeholder="Jumlah Bayar"
+                    formControlName="bayar"
+                    [class.line-danger]="validateOrder.get('bayar').value < total"
+                  ></ion-input>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-label>Kembali</ion-label>
+                  <ion-input
+                    placeholder="Kembalian"
+                    [value]="(validateOrder.get('bayar').value - total) | rupiah"
+                  >
+                  </ion-input>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(500)"
+                    >{{ 500 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(1000)"
+                    >{{ 1000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(0)"
+                  >
+                    C
+                  </ion-button>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(2000)"
+                    >{{ 2000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(5000)"
+                    >{{ 5000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(10000)"
+                    >{{ 10000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(20000)"
+                    >{{ 20000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(50000)"
+                    >{{ 50000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button
+                    expand="full"
+                    color="primary"
+                    (click)="tambahBayar(100000)"
+                    >{{ 100000 | rupiah }}</ion-button
+                  >
+                </ion-col>
+                <ion-col size="12">
+                  <ion-button
+                    expand="block"
+                    color="warning"
+                    mode="ios"
+                    size="medium"
+                    [disabled]="validateOrder.get('bayar').value < total && (!validateOrder.get('member').value && !isMember)"
+                    (click)="submitOrder()"
+                  >
+                    Bayar</ion-button
+                  >
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-body" *ngIf="showDetail">
+          <ion-row>
+            <ion-col size="6">
+              <ion-input
+                placeholder="Pilih Sales"
+                formControlName="sales"
+                (click)="openSales()"
+              >
+              </ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item lines="none" class="hg bg-transparent no-padding">
+                <ion-label>Member</ion-label>
+                <ion-toggle
+                  color="primary"
+                  size="small"
+                  mode="ios"
+                  [(ngModel)]="isMember"
+                  [ngModelOptions]="{standalone: true}"
+                  (ionChange)="toggleMember($event.target.value)"
+                ></ion-toggle>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="isMember">
+            <ion-col [size]="(jenisBayar != 1 )?4:6">
+              <ion-input
+                placeholder="Pilih Member"
+                formControlName="member"
+                (click)="openMember()"
+              >
+              </ion-input>
+            </ion-col>
+            <ion-col [size]="(jenisBayar != 1)?4:6">
+              <ion-select
+                [(ngModel)]="jenisBayar"
+                [ngModelOptions]="{standalone: true}"
+                placeholder="Pembayaran"
+              >
+                <ion-select-option value="1" selected>TUNAI</ion-select-option>
+                <ion-select-option value="2">KREDIT</ion-select-option>
+                <ion-select-option value="3">TRANSFER</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col size="4" *ngIf="jenisBayar == 2">
+              <ion-input
+                type="number"
+                placeholder="Berapa Hari"
+                formControlName="deadline"
+              ></ion-input>
+            </ion-col>
+            <ion-col size="4" *ngIf="jenisBayar == 3">
+              <ion-select
+                [(ngModel)]="pilihBank"
+                placeholder="Pilih Bank"
+                formControlName="bank"
+              >
+                <ion-select-option 
+                *ngFor="let item of dataBank" value="{{ item.id }}">{{ item.bank }}</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col size="4" *ngIf="jenisBayar == 3">
+              <ion-input
+                type="number"
+                placeholder="Nominal Transfer"
+                formControlName="transfer"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!isMember">
+            <ion-col size="6">
+              <ion-input
+                formControlName="nama"
+                placeholder="Nama Pembeli"
+              ></ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <ion-input
+                formControlName="alamat"
+                placeholder="Alamat Pembeli"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row lines="none">
+            <ion-col size="6">
+              <ion-select
+                [(ngModel)]="pilihMedia"
+                placeholder="Pilih Media"
+                formControlName="media"
+              >
+                <ion-select-option value="0" selected> -- Pilih Media --</ion-select-option>
+                <ion-select-option 
+                *ngFor="let item of dataPilMedia" value="{{ item.id }}">{{ item.media }}</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col size="6" *ngIf="pilihMedia == '4'">
+              <ion-input
+                type="number"
+                formControlName="biaya_cod"
+                (ionChange)="calcTotal()"
+                placeholder="Biaya COD"
+              >
+              </ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <ion-select
+                [(ngModel)]="pilihEkspedisi"
+                placeholder="Pilih Ekspedisi"
+                formControlName="expedisi"
+              >
+                <ion-select-option value="0" selected> -- Pilih Ekspedisi --</ion-select-option>
+                <ion-select-option 
+                *ngFor="let item of dataEkspedisi" value="{{ item.id }}">{{ item.nama_expedisi }}</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col size="6">
+              <ion-input
+                formControlName="no_resi"
+                placeholder="No Resi"
+              >
+              </ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <ion-input
+                type="number"
+                formControlName="ongkir"
+                (ionChange)="calcTotal()"
+                placeholder="Ongkir / Biaya Lain"
+              >
+              </ion-input>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item lines="none" class="hg bg-transparent no-padding">
+                <ion-label>Dropship</ion-label>
+                <ion-toggle
+                  color="primary"
+                  size="small"
+                  mode="ios"
+                  [(ngModel)]="isDropship"
+                  [ngModelOptions]="{standalone: true}"
+                ></ion-toggle>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <div class="hg">
+            <ion-label *ngIf="isDropship" class="lbl-1">Pengirim</ion-label>
+            <ion-row *ngIf="isDropship">
+              <ion-col size="4">
+                <ion-input
+                  formControlName="nama_pengirim"
+                  placeholder="Nama Pengirim"
+                >
+                </ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input
+                  formControlName="alamat_pengirim"
+                  placeholder="Alamat Pengirim"
+                >
+                </ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input
+                  formControlName="no_hp_pengirim"
+                  placeholder="Hp Pengirim"
+                >
+                </ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-label *ngIf="isDropship" class="lbl-1">Penerima</ion-label>
+            <ion-row *ngIf="isDropship">
+              <ion-col size="4">
+                <ion-input
+                  formControlName="nama_penerima"
+                  placeholder="Nama Penerima"
+                >
+                </ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input
+                  formControlName="alamat_penerima"
+                  placeholder="Alamat Penerima"
+                >
+                </ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input
+                  formControlName="no_hp_penerima"
+                  placeholder="Hp Penerima"
+                >
+                </ion-input>
+              </ion-col>
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="order-table">
+          <table>
+            <thead>
+              <th>Produk</th>
+              <th>KTS</th>
+              <th>@Harga</th>
+              <th>Total</th>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let item of cart;let i = index"
+                (click)="selectProduct(item,true)"
+              >
+                <td>{{item.nama_produk}}</td>
+                <td class="ion-text-right">{{item.qty}}</td>
+                <td class="ion-text-right">{{item.harga|rupiah}}</td>
+                <td class="ion-text-right">
+                  {{item.qty * item.harga - item.diskon_nominal | rupiah}}
+                </td>
+              </tr>
+              <tr
+                *ngIf="isMember && validateOrder.get('member').value && cart.length > 0"
+                class="ion-color-danger"
+                class="discount-row"
+              >
+                <td colspan="3" class="ion-text-right">Diskon Member</td>
+                <td class="ion-text-right">
+                  {{selectedMember.diskon_nominal | rupiah}}
+                </td>
+              </tr>
+              <tr *ngIf="!cart || cart.length == 0">
+                <td colspan="4" style="height: 40vh; text-align: center">
+                  <ion-icon name="cart"></ion-icon>
+                  Tambah produk terlebih dahulu.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="p-10">
+          <ion-button
+            expand="block"
+            [disabled]="!validateOrder.valid"
+            color="warning"
+            (click)="openBayar()"
+            mode="ios"
+          >
+            SIMPAN
+          </ion-button>
+        </div>
+      </form>
+    </ion-col>
+
+    <ion-col class="pr-mini" size="0" size-md="5" size-lg="5">
+      <div class="product-panel v2">
+        <ion-row>
+          <ion-col
+            size="3"
+            size-xs="6"
+            size-md="6"
+            size-lg="4"
+            *ngFor="let item of dataProduct"
+            (click)="selectProduct(item,false)"
+          >
+            <div class="item-product">
+              <div class="item-thumbnail">
+                <ion-img
+                  [src]="(item.url_gambar)?item.url_gambar:defaultProductImage"
+                ></ion-img>
+              </div>
+              <div class="item-text">
+                <ion-label>{{item.nama_produk}}</ion-label>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openProduct()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- popup pilih sales -->
+  <div class="popup" *ngIf="showSales">
+    <div class="popup-header bg-primary">
+      <ion-searchbar
+        placeholder="Cari Sales"
+        (ionChange)="getSales($event.target.value)"
+        [debounce]="250"
+      >
+      </ion-searchbar>
+      <div class="btn-close" (click)="openSales()">
+        <ion-icon name="close"></ion-icon>
+      </div>
+    </div>
+    <div class="popup-body">
+      <ion-list class="ion-no-padding">
+        <ion-item
+          lines="full"
+          *ngFor="let item of dataSales"
+          (click)="selectSales(item,false)"
+        >
+          <div>{{item.nama}}</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!-- popup pilih member -->
+  <div class="popup" *ngIf="showMember">
+    <div class="popup-header bg-primary">
+      <ion-searchbar
+        placeholder="Cari Member"
+        (ionChange)="getMember($event.target.value)"
+        [debounce]="250"
+      >
+      </ion-searchbar>
+      <div class="btn-close" (click)="openMember()">
+        <ion-icon name="close"></ion-icon>
+      </div>
+    </div>
+    <div class="popup-body">
+      <ion-list class="ion-no-padding">
+        <ion-item
+          lines="full"
+          *ngFor="let item of dataMember"
+          (click)="selectMember(item,false)"
+        >
+          <div>{{item.nama}}</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!-- popup detail product -->
+  <!-- <div class="popup with-backdrop" *ngIf="selectedProduct">
+    <div class="popup-wrapper">
+      <div class="popup-header v2">
+        {{selectedProduct.nama_produk}}
+        <div class="btn-close" (click)="selectProduct(false,'')">
+          <ion-icon name="close"></ion-icon>
+        </div>
+      </div>
+      <div class="popup-body">
+        <ion-row>
+          <ion-col lines="none">
+            <ion-input
+              type="number"
+              [(ngModel)]="qty"
+              placeholder="Masukan Jumlah"
+              (change)="calcJumlah($event.target.value)"
+            >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col lines="none">
+            <ion-input disabled [(ngModel)]="harga"> </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row [hidden]="isHidden">
+          <ion-col lines="none" class="ion-text-center"> Diskon </ion-col>
+        </ion-row>
+        <ion-row [hidden]="isHidden">
+          <ion-col size="3">
+            <ion-input
+              type="number"
+              [(ngModel)]="selectedProduct.diskon"
+              placeholder="%"
+              (change)="calcDiskon(1,'persen')"
+            >
+            </ion-input>
+          </ion-col>
+          <ion-col size="9">
+            <ion-input
+              type="number"
+              [(ngModel)]="selectedProduct.diskon_nominal"
+              placeholder="Nominal"
+              (change)="calcDiskon(2,'nominal')"
+            >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col [size]="(selectedProduct.isUpdate)?8:12">
+            <ion-button
+              color="warning"
+              size="medium"
+              expand="block"
+              mode="ios"
+              (click)="addToCart()"
+            >
+              <span *ngIf="!selectedProduct.isUpdate">Tambah</span>
+              <span *ngIf="selectedProduct.isUpdate">Ubah</span>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4" *ngIf="selectedProduct.isUpdate">
+            <ion-button
+              color="danger"
+              size="medium"
+              expand="block"
+              mode="ios"
+              (click)="deleteFromCart()"
+            >
+              Hapus
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="popup with-backdrop" *ngIf="selectedProduct">
+    <div class="popup-wrapper">
+      <div class="popup-header">
+        {{selectedProduct.nama_produk}}
+        <div class="btn-close" (click)="selectProduct(false)">
+          <ion-icon name="close"></ion-icon>
+        </div>
+      </div>
+      <div class="popup-body">
+        <ion-row>
+          <ion-col lines="none">
+            <ion-input type="number" [(ngModel)]="qty" placeholder="Masukan Jumlah"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col lines="none">
+            <ion-select placeholder="Pilih Harga" [(ngModel)]="harga">
+              <ion-select-option [value]="selectedProduct.harga_1">Harga 1 : {{selectedProduct.harga_1}}
+              </ion-select-option>
+              <ion-select-option [value]="selectedProduct.harga_2">Harga 2 : {{selectedProduct.harga_2}}
+              </ion-select-option>
+              <ion-select-option [value]="selectedProduct.harga_3">Harga 3 : {{selectedProduct.harga_3}}
+              </ion-select-option>
+              <ion-select-option [value]="selectedProduct.harga_4">Harga 4 : {{selectedProduct.harga_4}}
+              </ion-select-option>
+              <ion-select-option [value]="selectedProduct.harga_5">Harga 5 : {{selectedProduct.harga_5}}
+              </ion-select-option>
+              <ion-select-option [value]="selectedProduct.harga_6">Harga 6 : {{selectedProduct.harga_6}}
+              </ion-select-option>
+              <ion-select-option [value]="selectedProduct.harga_7">Harga 7 : {{selectedProduct.harga_7}}
+              </ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button color="warning" size="medium" expand="block" mode="ios" (click)="addToCart()">Tambah
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>

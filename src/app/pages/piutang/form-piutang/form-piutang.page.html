@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Piutang</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="list-input">
+    <ion-item lines="none">
+      <ion-label position="stacked">Pembeli</ion-label>
+      <ion-input type="text" [(ngModel)]="piutang.pembeli" [disabled]="true"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">No Faktur</ion-label>
+      <ion-input type="text" [(ngModel)]="piutang.no_faktur" [disabled]="true"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Tanggal</ion-label>
+      <ion-input type="text" [(ngModel)]="piutang.tanggal" [disabled]="true"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Deadline</ion-label>
+      <ion-input type="text" [(ngModel)]="piutang.deadline" [disabled]="true"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Jumlah Hutang</ion-label>
+      <ion-input type="number" [(ngModel)]="piutang.jumlah_hutang" [disabled]="false" (ionChange)="updateSisa()">
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Jumlah Bayar</ion-label>
+      <ion-input type="number" [(ngModel)]="piutang.jumlah_bayar" [disabled]="false" (ionChange)="updateSisa()">
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Sisa</ion-label>
+      <ion-input type="number" [(ngModel)]="piutang.sisa" [disabled]="true"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button (click)="save()" expand="block">
+      Simpan
+    </ion-button>
+  </div>
+</ion-content>

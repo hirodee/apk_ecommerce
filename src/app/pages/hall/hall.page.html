@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="toolbar">
+    <ion-img src="/assets/svg/hall-of-fame.svg"></ion-img>
+  </div>
+  <div class="container">
+    <ion-icon name="arrow-back" routerLink="/home" class="back-icon"></ion-icon>
+    <div class="header" padding>
+      <div class="greeting">
+        <div class="winner">
+          <div class="pic">
+            <ion-img [src]="bestCS[0].url_profile" class="profile"></ion-img>
+            <ion-img src="/assets/svg/first.svg" class="badge"></ion-img>
+          </div>
+          <div class="body">
+            <ion-label class="top">{{bestCS[0].nama_cs}}</ion-label><br>
+            <ion-label class="bottom">{{bestCS[0].closing}} Closing</ion-label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper" padding>
+        <div class="list" *ngFor="let item of bestCS;let i = index">
+          <div class="pic">
+            <ion-img [src]="item.url_profile" class="profile"></ion-img>
+            <ion-img src="/assets/svg/second.svg" class="badge" *ngIf="i == 1"></ion-img>
+            <ion-img src="/assets/svg/third.svg" class="badge" *ngIf="i == 2"></ion-img>
+            <ion-img src="/assets/svg/fourth.svg" class="badge" *ngIf="i == 3"></ion-img>
+          </div>
+          <div class="body">
+            <ion-label class="top">{{item.nama_cs}}</ion-label><br>
+            <h4 class="bottom" *ngIf="i == 1">2nd Place</h4>
+            <h4 class="bottom" *ngIf="i == 2">3rd Place</h4>
+            <h4 class="bottom" *ngIf="i == 3">4th Place</h4>
+          </div>
+          <div class="closing">
+            <ion-label>{{item.closing}} Closing</ion-label>
+          </div>
+        </div>
+    </div>
+  </div>
+</ion-content>

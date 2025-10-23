@@ -1,0 +1,25 @@
+<div class="pg">
+  <div class="page">
+    <div class="logo">
+      <ion-img src="/assets/svg/logo-rect.svg"></ion-img>
+    </div>
+    <div class="text-info mt-3">
+      <h1>AIPOS</h1>
+      <label>Sebelum lanjut silahkan masukan url server anda terlabih dahulu.</label>
+    </div>
+    <div class="form-auth">
+      <div class="f-group f-margin">
+        <ion-input [(ngModel)]="state.url_server" class="no-border bg-light" type="text"
+          placeholder="http://192.xxx.xxx.xxx">
+        </ion-input>
+      </div>
+      <div class="f-group f-margin">
+        <ion-button (click)="save()" color="primary" class="masuk" expand="block" mode="ios">Lanjutkan</ion-button>
+      </div>
+    </div>
+    <div class="k-margin footer text-white"
+      style="font-size: 12px;font-weight: bolder; color: #808080; margin-top: 20px;margin-bottom: 50px;">
+      AIPOS SYSTEM &copy; DIENG CYBER
+    </div>
+  </div>
+</div>

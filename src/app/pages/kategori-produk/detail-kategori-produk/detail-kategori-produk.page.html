@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Kategori</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="updateKategori()">
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteKategori()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Kode Kategori</ion-label>
+      <ion-label>{{kategori.id_kategori_2}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Kategori</ion-label>
+      <ion-label>{{kategori.nama_kategori}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

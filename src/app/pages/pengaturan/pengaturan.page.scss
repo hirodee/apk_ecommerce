@@ -1,0 +1,29 @@
+.header-top {
+    padding: 20px;
+    min-height: 100px;
+    color: white;
+    background: #34B6FF;
+
+    ion-img {
+        height: 50px;
+    }
+
+    h5 {
+        color: white !important;
+    }
+
+    .marq {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.43);
+
+        ion-badge {
+            padding: 8px;
+            border-radius: 100px;
+        }
+
+        .menu {
+            padding: 7px;
+            background: white;
+        }
+    }
+}
